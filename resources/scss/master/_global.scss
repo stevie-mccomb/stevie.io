@@ -1,0 +1,41 @@
+html, body {
+    color: #666;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    background: white;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+a.main-content-skip {
+    position: absolute;
+    left: 50%;
+    transform: translateY(-200%);
+
+    &:focus {
+        transform: translateY(1rem);
+        z-index: 9999;
+        padding: 1rem;
+        color: white;
+        background: black;
+        border: 2px solid black;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        outline-color: #00a6ef;
+    }
+}
+
+.container {
+    width: 1680px;
+    display: block;
+    margin: 0 auto;
+    box-sizing: border-box;
+    @media (max-width: 1679px) {
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

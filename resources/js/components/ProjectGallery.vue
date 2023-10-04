@@ -1,0 +1,358 @@
+<style lang="scss" scoped>
+    @import '../../scss/master/variables';
+
+    .intro {
+        color: #666;
+        margin: 0 auto 2rem auto;
+    }
+
+    .sidebar-and-grid-container {
+        display: flex;
+        gap: 2rem;
+        @media (max-width: 639px) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+
+    .sidebar header {
+        color: black;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+    }
+
+    .spinner {
+        font-size: 4rem;
+    }
+
+    .project-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        position: relative;
+        @media (max-width: 1199px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media (max-width: 959px) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (max-width: 479px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .cell-padding {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        position: relative;
+    }
+
+    .tile {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        transform: translateY(0);
+        transition: transform 0.5s ease;
+
+        &:hover {
+            transform: translateY(-0.25rem);
+
+            .flip-container {
+                transform: rotateY(180deg);
+            }
+
+            .front, .back {
+                box-shadow: $shadow-darker;
+            }
+        }
+    }
+
+    .flip-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.5s ease;
+        perspective: 100px;
+    }
+
+    .front, .back {
+        padding: 2rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        box-sizing: border-box;
+        box-shadow: $shadow;
+        transition: box-shadow 0.5s ease;
+
+        h3, h4, p, .anchor {
+            color: white;
+        }
+    }
+
+    .front {
+        border-radius: 0.25rem;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .back {
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+        transform: rotateY(180deg);
+        border-radius: 0.25rem;
+        background: black;
+    }
+
+    .overlay {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgb(0 0 0 / 75%);
+        padding: 1rem;
+        box-sizing: border-box;
+        color: white;
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .project-name {
+        line-height: 1.5;
+        font-weight: 800;
+    }
+
+    .project-type {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    h3 {
+        font-weight: 800;
+        line-height: 1.25;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    h4 {
+        font-weight: 300;
+        margin-bottom: 2rem;
+        font-style: italic;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .anchor {
+        margin-top: auto;
+    }
+
+    .v-move, .v-enter-active, .v-leave-active {
+        transform-origin: center center;
+        transition: all 0.25s ease;
+    }
+
+    .v-enter-from, .v-leave-to {
+        opacity: 0;
+        transform: scale(0);
+    }
+</style>
+
+<template>
+    <div class="project-gallery-component">
+        <div class="container">
+            <p class="intro" v-if="intro?.length">{{ intro }}</p>
+
+            <div class="sidebar-and-grid-container">
+                <aside class="sidebar">
+                    <header>Project Types</header>
+
+                    <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
+                        {{ type.name }}
+                    </Checkbox>
+                </aside>
+
+                <div class="spinner" v-if="loading">
+                    <span class="fa-light fa-trillium fa-spin"></span>
+                </div>
+
+                <div class="project-grid" v-else-if="projects.length">
+                    <TransitionGroup>
+                        <div class="cell" v-for="project in filteredProjects" :key="project.id">
+                            <div class="cell-padding">
+                                <router-link :to="`/projects/${project.slug}`" class="tile">
+                                    <div class="flip-container">
+                                        <div class="front" :style="{ backgroundImage: `url(${project.cover})` }">
+                                            <span class="overlay">
+                                                <span class="project-name">{{ project.name }}</span>
+
+                                                <span class="project-type">
+                                                    <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+
+                                                    <span>{{ project.type }}</span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div class="back">
+                                            <h3>{{ project.name }}</h3>
+
+                                            <h4>
+                                                <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+
+                                                {{ project.type }}
+                                            </h4>
+
+                                            <p>{{ project.summary }}</p>
+
+                                            <span class="anchor">
+                                                View Project <span class="fa-light fa-long-arrow-right"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </div>
+                    </TransitionGroup>
+                </div>
+
+                <p v-else>
+                    An error occurred when loading the projects, please refresh and try again.
+                </p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+    import Checkbox from '@/components/Checkbox.vue';
+    import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
+    import { computed, ref } from 'vue';
+    import { loading, projects } from '@/stores/projects';
+
+    const props = defineProps({
+        intro: {
+            type: String,
+            default: ''
+        }
+    });
+
+    const types = [
+        {
+            name: 'Web App',
+            icon: 'fa-code-fork'
+        },
+        {
+            name: 'Website',
+            icon: 'fa-desktop'
+        },
+        {
+            name: 'Mobile App',
+            icon: 'fa-mobile'
+        },
+        {
+            name: 'Video Game',
+            icon: 'fa-gamepad'
+        }
+    ];
+    const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
+    syncQueryParam('types', selectedTypes);
+
+    const filteredProjects = computed(() => {
+        let filtered = projects.value.slice();
+
+        if (selectedTypes.value.length) {
+            filtered = filtered.filter(project => selectedTypes.value.includes(project.type));
+        }
+
+        return filtered;
+    });
+
+    /*const projects = [
+        {
+            id: 1,
+            name: 'isolved University',
+            slug: 'isolved-university',
+            type: 'Web App',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 2,
+            name: 'Example App Project',
+            slug: 'example-app-project',
+            type: 'Mobile App',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 3,
+            name: 'Example Game Project',
+            slug: 'example-game-project',
+            type: 'Video Game',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 4,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 5,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 6,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 7,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        }
+    ];*/
+</script>
