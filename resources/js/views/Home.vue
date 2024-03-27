@@ -1,9 +1,3 @@
-<style lang="scss" scope>
-    section {
-        padding: 4rem 0;
-    }
-</style>
-
 <template>
     <div class="home view">
         <HomeHero />
@@ -18,3 +12,9 @@
     import HomeHero from '@/components/HomeHero.vue';
     import ProjectGallery from '@/components/ProjectGallery.vue';
 </script>
+
+<style lang="scss" scope>
+    section {
+        padding: 4rem 0;
+    }
+</style>

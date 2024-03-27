@@ -20,6 +20,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/resources/js',
+            '~': '/resources/scss',
             'vue': 'vue/dist/vue.esm-bundler.js',
         },
     },

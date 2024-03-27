@@ -1,127 +1,3 @@
-<style lang="scss" scoped>
-    .home-hero-component {
-        background: black;
-        text-align: center;
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-    }
-
-    .copy-container {
-        position: relative;
-        z-index: 1;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 4rem 0 8rem 0;
-        box-sizing: border-box;
-    }
-
-    h1, h2, h3, h4, h5 {
-        color: white;
-        margin-bottom: 1rem;
-        opacity: 0;
-        transform: translateY(2rem);
-        display: block !important;
-
-        &.loaded {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    h1 {
-        color: white;
-        font-size: 3rem;
-        font-weight: 300;
-        margin-bottom: 2rem;
-        letter-spacing: 0.32rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    h4 {
-        font-weight: 300;
-    }
-
-    h5 {
-        font-size: 1.25rem;
-        font-weight: 300;
-        margin-bottom: 2rem;
-    }
-
-    canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    .scroll-curve {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 8rem;
-        transition: transform 0.5s ease;
-    }
-
-    svg {
-        display: block;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    svg path {
-        fill: white;
-        stroke: white;
-    }
-
-    .fa-computer-mouse-scrollwheel {
-        color: black;
-        font-size: 2rem;
-        position: absolute;
-        bottom: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
-        animation-name: bounce;
-        animation-duration: 1s;
-        animation-direction: alternate;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-    }
-
-    .v-enter-active, .v-leave-active {
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .v-enter-from, .v-leave-to {
-        opacity: 0 !important;
-        transform: translateY(2rem) !important;
-    }
-
-    @keyframes bounce {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(0.5rem); }
-    }
-</style>
-
 <template>
     <div class="home-hero-component">
         <div class="copy-container">
@@ -265,3 +141,128 @@
         }
     });
 </script>
+
+<style lang="scss" scoped>
+    .home-hero-component {
+        background: black;
+        text-align: center;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .copy-container {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 0 8rem 0;
+        box-sizing: border-box;
+    }
+
+    h1, h2, h3, h4, h5 {
+        color: white;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(2rem);
+        display: block !important;
+
+        &.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h1 {
+        color: white;
+        font-size: 3rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+        letter-spacing: 0.32rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    h4 {
+        font-weight: 300;
+        margin-bottom: 0;
+    }
+
+    h5 {
+        font-size: 1.25rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+    }
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .scroll-curve {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8rem;
+        transition: transform 0.5s ease;
+    }
+
+    svg {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    svg path {
+        fill: white;
+        stroke: white;
+    }
+
+    .fa-computer-mouse-scrollwheel {
+        color: black;
+        font-size: 2rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-name: bounce;
+        animation-duration: 1s;
+        animation-direction: alternate;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+    }
+
+    .v-enter-active, .v-leave-active {
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .v-enter-from, .v-leave-to {
+        opacity: 0 !important;
+        transform: translateY(2rem) !important;
+    }
+
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(0.5rem); }
+    }
+</style>

@@ -1,3 +1,179 @@
+<template>
+    <div class="project-gallery-component">
+        <div class="container">
+            <p class="intro" v-if="intro?.length">{{ intro }}</p>
+
+            <div class="sidebar-and-grid-container">
+                <aside class="sidebar">
+                    <header>Project Types</header>
+
+                    <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
+                        {{ type.name }}
+                    </Checkbox>
+                </aside>
+
+                <div class="spinner" v-if="loading">
+                    <span class="fa-light fa-trillium fa-spin"></span>
+                </div>
+
+                <div class="project-grid" v-else-if="projects.length">
+                    <TransitionGroup>
+                        <div class="cell" v-for="project in filteredProjects" :key="project.id">
+                            <div class="cell-padding">
+                                <router-link :to="`/projects/${project.slug}`" class="tile">
+                                    <div class="flip-container">
+                                        <div class="front" :style="{ backgroundImage: `url(${project.cover})` }">
+                                            <span class="overlay">
+                                                <span class="project-name">{{ project.name }}</span>
+
+                                                <span class="project-type">
+                                                    <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+
+                                                    <span>{{ project.type }}</span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        <div class="back">
+                                            <h3>{{ project.name }}</h3>
+
+                                            <h4>
+                                                <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+
+                                                {{ project.type }}
+                                            </h4>
+
+                                            <p>{{ project.summary }}</p>
+
+                                            <span class="anchor">
+                                                View Project <span class="fa-light fa-long-arrow-right"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </div>
+                    </TransitionGroup>
+                </div>
+
+                <p v-else>
+                    An error occurred when loading the projects, please refresh and try again.
+                </p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+    import Checkbox from '@/components/Checkbox.vue';
+    import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
+    import { computed, ref } from 'vue';
+    import { loading, projects } from '@/stores/projects';
+
+    const props = defineProps({
+        intro: {
+            type: String,
+            default: ''
+        }
+    });
+
+    const types = [
+        {
+            name: 'Web App',
+            icon: 'fa-code-fork'
+        },
+        {
+            name: 'Website',
+            icon: 'fa-desktop'
+        },
+        {
+            name: 'Mobile App',
+            icon: 'fa-mobile'
+        },
+        {
+            name: 'Video Game',
+            icon: 'fa-gamepad'
+        }
+    ];
+    const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
+    syncQueryParam('types', selectedTypes);
+
+    const filteredProjects = computed(() => {
+        let filtered = projects.value.slice();
+
+        if (selectedTypes.value.length) {
+            filtered = filtered.filter(project => selectedTypes.value.includes(project.type));
+        }
+
+        return filtered;
+    });
+
+    /*const projects = [
+        {
+            id: 1,
+            name: 'isolved University',
+            slug: 'isolved-university',
+            type: 'Web App',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 2,
+            name: 'Example App Project',
+            slug: 'example-app-project',
+            type: 'Mobile App',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 3,
+            name: 'Example Game Project',
+            slug: 'example-game-project',
+            type: 'Video Game',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 4,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 5,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 6,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        },
+
+        {
+            id: 7,
+            name: 'Example Project',
+            slug: 'example-project',
+            type: 'Website',
+            cover: 'https://source.unsplash.com/random/320x320',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
+        }
+    ];*/
+</script>
+
 <style lang="scss" scoped>
     @import '../../scss/master/variables';
 
@@ -180,179 +356,3 @@
         transform: scale(0);
     }
 </style>
-
-<template>
-    <div class="project-gallery-component">
-        <div class="container">
-            <p class="intro" v-if="intro?.length">{{ intro }}</p>
-
-            <div class="sidebar-and-grid-container">
-                <aside class="sidebar">
-                    <header>Project Types</header>
-
-                    <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
-                        {{ type.name }}
-                    </Checkbox>
-                </aside>
-
-                <div class="spinner" v-if="loading">
-                    <span class="fa-light fa-trillium fa-spin"></span>
-                </div>
-
-                <div class="project-grid" v-else-if="projects.length">
-                    <TransitionGroup>
-                        <div class="cell" v-for="project in filteredProjects" :key="project.id">
-                            <div class="cell-padding">
-                                <router-link :to="`/projects/${project.slug}`" class="tile">
-                                    <div class="flip-container">
-                                        <div class="front" :style="{ backgroundImage: `url(${project.cover})` }">
-                                            <span class="overlay">
-                                                <span class="project-name">{{ project.name }}</span>
-
-                                                <span class="project-type">
-                                                    <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
-
-                                                    <span>{{ project.type }}</span>
-                                                </span>
-                                            </span>
-                                        </div>
-
-                                        <div class="back">
-                                            <h3>{{ project.name }}</h3>
-
-                                            <h4>
-                                                <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
-
-                                                {{ project.type }}
-                                            </h4>
-
-                                            <p>{{ project.summary }}</p>
-
-                                            <span class="anchor">
-                                                View Project <span class="fa-light fa-long-arrow-right"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </router-link>
-                            </div>
-                        </div>
-                    </TransitionGroup>
-                </div>
-
-                <p v-else>
-                    An error occurred when loading the projects, please refresh and try again.
-                </p>
-            </div>
-        </div>
-    </div>
-</template>
-
-<script setup>
-    import Checkbox from '@/components/Checkbox.vue';
-    import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
-    import { computed, ref } from 'vue';
-    import { loading, projects } from '@/stores/projects';
-
-    const props = defineProps({
-        intro: {
-            type: String,
-            default: ''
-        }
-    });
-
-    const types = [
-        {
-            name: 'Web App',
-            icon: 'fa-code-fork'
-        },
-        {
-            name: 'Website',
-            icon: 'fa-desktop'
-        },
-        {
-            name: 'Mobile App',
-            icon: 'fa-mobile'
-        },
-        {
-            name: 'Video Game',
-            icon: 'fa-gamepad'
-        }
-    ];
-    const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
-    syncQueryParam('types', selectedTypes);
-
-    const filteredProjects = computed(() => {
-        let filtered = projects.value.slice();
-
-        if (selectedTypes.value.length) {
-            filtered = filtered.filter(project => selectedTypes.value.includes(project.type));
-        }
-
-        return filtered;
-    });
-
-    /*const projects = [
-        {
-            id: 1,
-            name: 'isolved University',
-            slug: 'isolved-university',
-            type: 'Web App',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 2,
-            name: 'Example App Project',
-            slug: 'example-app-project',
-            type: 'Mobile App',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 3,
-            name: 'Example Game Project',
-            slug: 'example-game-project',
-            type: 'Video Game',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 4,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 5,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 6,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 7,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        }
-    ];*/
-</script>
