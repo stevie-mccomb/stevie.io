@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,8 @@ use Illuminate\Support\Facades\Route;
  * Async routes
  */
 Route::group(['prefix' => 'async', 'as' => 'async.'], function () {
-    Route::get('projects', 'App\Http\Controllers\ProjectController@index')->name('projects.index');
+    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('technologies', [TechnologyController::class, 'index'])->name('technologies.index');
 });
 
 /**

@@ -13,7 +13,7 @@
     import ProjectGallery from '@/components/ProjectGallery.vue';
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
     section {
         padding: 4rem 0;
     }

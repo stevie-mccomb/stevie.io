@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -14,7 +15,11 @@ class ProjectController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json([
+        $projects = Project::with(['technologies', 'type'])->orderBy('name')->get();
+
+        return response()->json($projects);
+
+        /*return response()->json([
             [
                 'id' => 1,
                 'name' => 'isolved University',
@@ -22,6 +27,7 @@ class ProjectController extends Controller
                 'type' => 'Web App',
                 'cover' => '/img/projects/covers/isolved-university.webp',
                 'hero' => '/img/projects/heroes/isolved-university.webp',
+                'url' => 'https://learning.myisolved.com',
                 'summary' => 'A full-featured Learning Management System (LMS) used by over 1.5 million employees to maintain education compliance for small, medium, and enterprise businesses.',
                 'introduction' => '<p>Started in 2015 as an in-house knowledge base to store employee training articles for <strong>isolved</strong>, a Human Capital Management (HCM) company based in Charlotte, isolved University has become a <strong>feature-rich Learning Management System (LMS)</strong> that competes with the likes of Docebo, Moodle, and SAP Litmos.</p><p>isolved University allows employees to take <strong>e-learning standards-compliant courses</strong> in a guided system of learning paths and rewards them with certificates for their completion. The platform also features a <strong>robust gamification system</strong> that allows company administrators to control the rewards system for their own employees to earn <strong>custom points, badges, and ranks</strong>, and compete with each other for control of the company-wide leaderboard.</p><p>The LMS product offers an integration with <strong>Go1</strong>, a leading provider of e-learning standards courses based in Queensland, Australia. This Go1 integration connects employees with a library of <strong>over 100,000 e-learning courses</strong> covering everything from software training to business intelligience skills to personal life management education.</p>',
                 'images' => [
@@ -218,6 +224,6 @@ class ProjectController extends Controller
                 'hero' => 'https://source.unsplash.com/random/1920x480',
                 'summary' => 'Lorem ipsum dolor sit amet, consictetur adipiscing.',
             ]
-        ]);
+        ]);*/
     }
 }

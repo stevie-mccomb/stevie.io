@@ -5,11 +5,25 @@
 
             <div class="sidebar-and-grid-container">
                 <aside class="sidebar">
-                    <header>Project Types</header>
+                    <section>
+                        <header>
+                            Project Types</header>
 
-                    <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
-                        {{ type.name }}
-                    </Checkbox>
+
+                        <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
+                            {{ type.name }}
+                        </Checkbox>
+                    </section>
+
+                    <section>
+                        <header>
+                            Technologies
+                        </header>
+
+                        <Checkbox v-for="technology in technologies" :value="technology.name" v-model="selectedTechnologies">
+                            {{ technology.name }}
+                        </Checkbox>
+                    </section>
                 </aside>
 
                 <div class="spinner" v-if="loading">
@@ -24,26 +38,34 @@
                                     <div class="flip-container">
                                         <div class="front" :style="{ backgroundImage: `url(${project.cover})` }">
                                             <span class="overlay">
-                                                <span class="project-name">{{ project.name }}</span>
+                                                <span class="project-name">
+                                                    {{ project.name }}
+                                                </span>
 
                                                 <span class="project-type">
-                                                    <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+                                                    <span class="fa-light" :class="types.find(type => type.name === project.type.name).icon"></span>
 
-                                                    <span>{{ project.type }}</span>
+                                                    <span>
+                                                        {{ project.type.name }}
+                                                    </span>
                                                 </span>
                                             </span>
                                         </div>
 
                                         <div class="back">
-                                            <h3>{{ project.name }}</h3>
+                                            <h3>
+                                                {{ project.name }}
+                                            </h3>
 
                                             <h4>
-                                                <span class="fa-light" :class="types.find(type => type.name === project.type).icon"></span>
+                                                <span class="fa-light" :class="types.find(type => type.name === project.type.name).icon"></span>
 
-                                                {{ project.type }}
+                                                {{ project.type.name }}
                                             </h4>
 
-                                            <p>{{ project.summary }}</p>
+                                            <p>
+                                                {{ project.summary }}
+                                            </p>
 
                                             <span class="anchor">
                                                 View Project <span class="fa-light fa-long-arrow-right"></span>
@@ -66,8 +88,9 @@
 
 <script setup>
     import Checkbox from '@/components/Checkbox.vue';
+    import useFetcher from '@/composables/useFetcher';
     import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
-    import { computed, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
     import { loading, projects } from '@/stores/projects';
 
     const props = defineProps({
@@ -98,80 +121,38 @@
     const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
     syncQueryParam('types', selectedTypes);
 
+    const technologyFetcher = useFetcher('/async/technologies');
+    const technologies = ref([]);
+    const selectedTechnologies = ref([]);
+    syncQueryParam('technologies', selectedTechnologies);
+
     const filteredProjects = computed(() => {
         let filtered = projects.value.slice();
 
-        if (selectedTypes.value.length) {
-            filtered = filtered.filter(project => selectedTypes.value.includes(project.type));
+        if (selectedTypes.value?.length) {
+            filtered = filtered.filter(project => {
+                console.log(selectedTypes.value, project.type.name, selectedTypes.value.includes(project.type.name));
+                return selectedTypes.value.includes(project.type?.name);
+            });
         }
+
+        if (selectedTechnologies.value?.length) {
+            filtered = filtered.filter(project => {
+                const projectTechnologyNames = project.technologies.map(tech => tech.name);
+                const intersection = selectedTechnologies.value.filter(name => projectTechnologyNames.includes(name));
+                return intersection.length > 0;
+            });
+        }
+
+        console.log(filtered);
 
         return filtered;
     });
 
-    /*const projects = [
-        {
-            id: 1,
-            name: 'isolved University',
-            slug: 'isolved-university',
-            type: 'Web App',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 2,
-            name: 'Example App Project',
-            slug: 'example-app-project',
-            type: 'Mobile App',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 3,
-            name: 'Example Game Project',
-            slug: 'example-game-project',
-            type: 'Video Game',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 4,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 5,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 6,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        },
-
-        {
-            id: 7,
-            name: 'Example Project',
-            slug: 'example-project',
-            type: 'Website',
-            cover: 'https://source.unsplash.com/random/320x320',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing.'
-        }
-    ];*/
+    onMounted(async () => {
+        technologies.value = await technologyFetcher.fetch();
+        // selectedTechnologies.value = technologies.value.map(tech => tech.id);
+    });
 </script>
 
 <style lang="scss" scoped>
@@ -189,6 +170,10 @@
             flex-direction: column;
             gap: 1rem;
         }
+    }
+
+    .sidebar section {
+        margin-bottom: 2rem;
     }
 
     .sidebar header {

@@ -8,12 +8,18 @@
                     <h1>{{ project.name }}</h1>
 
                     <h2>
-                        <span class="fa-light" :class="types.find(type => type.name === project.type)?.icon"></span>
+                        <span class="fa-light" :class="project.type.icon"></span>
 
-                        {{ project.type }}
+                        {{ project.type.name }}
                     </h2>
 
-                    <p>{{ project.summary }}</p>
+                    <p>
+                        {{ project.summary }}
+                    </p>
+
+                    <a v-if="project?.url?.length" :href="project.url" target="_blank" class="button" style="margin-top: 2rem;">
+                        View Project <span class="fal fa-angle-right"></span>
+                    </a>
                 </div>
             </section>
 
