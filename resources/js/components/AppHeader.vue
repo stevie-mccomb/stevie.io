@@ -26,6 +26,7 @@
     h2 {
         letter-spacing: 0.1rem;
         font-size: 1.5rem;
+        margin-bottom: 0;
     }
 
     nav {

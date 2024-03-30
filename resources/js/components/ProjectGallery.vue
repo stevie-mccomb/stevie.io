@@ -7,8 +7,8 @@
                 <aside class="sidebar">
                     <section>
                         <header>
-                            Project Types</header>
-
+                            Project Types
+                        </header>
 
                         <Checkbox v-for="type in types" :value="type.name" v-model="selectedTypes">
                             {{ type.name }}
@@ -130,10 +130,7 @@
         let filtered = projects.value.slice();
 
         if (selectedTypes.value?.length) {
-            filtered = filtered.filter(project => {
-                console.log(selectedTypes.value, project.type.name, selectedTypes.value.includes(project.type.name));
-                return selectedTypes.value.includes(project.type?.name);
-            });
+            filtered = filtered.filter(project => selectedTypes.value.includes(project.type?.name));
         }
 
         if (selectedTechnologies.value?.length) {
