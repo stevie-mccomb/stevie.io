@@ -10,14 +10,6 @@
                     Projects
                 </router-link>
 
-                <router-link :to="{ name: 'admin.users.index' }">
-                    <span class="icon">
-                        <span class="fal fa-fw fa-users"></span>
-                    </span>
-
-                    Users
-                </router-link>
-
                 <a href="/logout">
                     <span class="icon">
                         <span class="fal fa-fw fa-lock"></span>
@@ -32,8 +24,20 @@
     </div>
 </template>
 
+<script setup>
+    if (!window?.User?.id) {
+        const intended = encodeURIComponent(router.currentRoute.value.fullPath);
+        router.push(`/login?intended=${intended}`);
+    }
+</script>
+
 <style lang="scss" scoped>
     @import '~/master/variables';
+
+    .admin.layout {
+        flex: 1;
+        background: darken(white, 10%);
+    }
 
     .container {
         padding-top: 2rem;
@@ -82,5 +86,10 @@
                 }
             }
         }
+    }
+
+    :deep(.sidebar + *) {
+        flex: 1;
+        margin-bottom: 2rem;
     }
 </style>

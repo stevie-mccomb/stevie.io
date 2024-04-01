@@ -1,0 +1,31 @@
+.form-group {
+    display: block;
+    margin-bottom: 1rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    label {
+        display: block;
+        color: black;
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="tel"], input[type="url"], textarea, select {
+        display: block;
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid darken(white, 15%);
+        box-sizing: border-box;
+        border-radius: 0.25rem;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        color: #666;
+    }
+}
+
+.form-required {
+    color: red;
+    margin-left: 0.25rem;
+}

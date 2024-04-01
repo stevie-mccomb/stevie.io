@@ -3,7 +3,9 @@
         <HomeHero />
 
         <section>
-            <ProjectGallery intro="These are the projects I'm proudest of. If you're looking for something specific, use the filters to find projects based on their technology or purpose." />
+            <ProjectGallery
+                intro="These are the projects I'm proudest of. If you're looking for something specific, the filters can narrow down the projects based on their technology or purpose."
+            />
         </section>
     </div>
 </template>

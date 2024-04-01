@@ -6,8 +6,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/components/App.vue';
 import routes from '@/routes';
 
-const app = createApp(App);
-const router = createRouter({
+window.app = createApp(App);
+window.router = createRouter({
     history: createWebHistory(),
     routes
 });

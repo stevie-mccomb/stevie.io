@@ -8,14 +8,28 @@ button {
 .button {
     display: inline-block;
     color: white;
+    font-size: 1rem;
     text-decoration: none;
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
     background: black;
+    border: 1px solid black;
     border-radius: 10rem;
     box-shadow: $shadow-none;
-    transition: box-shadow 0.25s ease;
+    transform: translateY(0);
+    transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+
+    &.outline {
+        color: black;
+        background: transparent;
+    }
 
     &:hover {
         box-shadow: $shadow-darker;
+        transform: translateY(-0.25rem);
+    }
+
+    &:hover.outline {
+        color: white;
+        background: black;
     }
 }

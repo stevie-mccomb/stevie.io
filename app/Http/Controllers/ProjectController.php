@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Models\ProjectType;
+use App\Http\Requests\Projects\DeleteRequest;
+use App\Http\Requests\Projects\StoreRequest;
+use App\Http\Requests\Projects\UpdateRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -225,5 +229,77 @@ class ProjectController extends Controller
                 'summary' => 'Lorem ipsum dolor sit amet, consictetur adipiscing.',
             ]
         ]);*/
+    }
+
+    /**
+     * Create a new project in storage.
+     */
+    public function store(StoreRequest $request): JsonResponse
+    {
+        $project = $this->_upsert($request);
+
+        return response()->json([
+            'project' => $project,
+        ]);
+    }
+
+    /**
+     * Update the given project in storage.
+     */
+    public function update(UpdateRequest $request, Project $project): JsonResponse
+    {
+        $project = $this->_upsert($request, $project);
+
+        return response()->json([
+            'project' => $project,
+        ]);
+    }
+
+    /**
+     * Delete the given project from storage.
+     */
+    public function destroy(DeleteRequest $request, Project $project): JsonResponse
+    {
+        $project->delete();
+
+        return response()->json([
+            'message' => 'Project successfully deleted.',
+        ]);
+    }
+
+    /**
+     * Upsert a project from given request data.
+     */
+    private function _upsert(StoreRequest|UpdateRequest $request, ?Project $project = null): Project
+    {
+        $data = $request->safe()->toArray();
+
+        $data['type_id'] = ProjectType::where('name', $data['type'])->value('id');
+        unset($data['type']);
+
+        if ($request->hasFile('cover')) {
+            $data['cover'] = $request->file('cover')->store('projects/covers', 'public');
+        }
+
+        if ($request->hasFile('hero')) {
+            $data['hero'] = $request->file('hero')->store('projects/heroes', 'public');
+        }
+
+        if (empty($data['cover'])) unset($data['cover']);
+        if (empty($data['hero'])) unset($data['hero']);
+
+        if (!empty($project)) {
+            $project->update($data);
+        } else {
+            $project = Project::create($data);
+        }
+
+        $project->refresh();
+
+        $project->technologies()->sync($request->safe()->technologies);
+
+        $project->load([ 'technologies', 'type' ]);
+
+        return $project;
     }
 }

@@ -17,7 +17,7 @@ class TechnologiesTableSeeder extends Seeder
     {
         DB::statement("
             INSERT INTO
-                `technologies` (`name`, `url`, `purpose`, `image`)
+                `technologies` (`name`, `purpose`, `url`, `image`)
             VALUES
                 (
                     'Laravel',

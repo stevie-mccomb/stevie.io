@@ -17,10 +17,11 @@
     @stack('styles')
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app" class="app"></div>
 
     <script>
         window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+        window.User = JSON.parse('<?php echo auth()->check() ? auth()->user()->toJson() : 'null'; ?>');
     </script>
     @vite('resources/js/app.js')
 </body>

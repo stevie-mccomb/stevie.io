@@ -1,9 +1,9 @@
 <template>
     <div class="project view" ref="root">
-        <Spinner v-if="loading" />
+        <Spinner v-if="isLoadingProjects" />
 
         <div v-else>
-            <section class="hero" :style="{ backgroundImage: `url(${project.hero})` }">
+            <section class="hero" :style="{ backgroundImage: `url(${project.hero_url})` }">
                 <div class="container">
                     <h1>{{ project.name }}</h1>
 
@@ -25,11 +25,17 @@
 
             <nav>
                 <div class="container">
-                    <Scroll to="introduction" :class="{ active: closestSection === introduction }">Introduction</Scroll>
+                    <Scroll to="introduction" :class="{ active: closestSection === introduction }">
+                        Introduction
+                    </Scroll>
 
-                    <Scroll to="gallery" :class="{ active: closestSection === gallery }">Gallery</Scroll>
+                    <Scroll to="gallery" :class="{ active: closestSection === gallery }" v-if="project?.images?.length">
+                        Gallery
+                    </Scroll>
 
-                    <Scroll to="technologies" :class="{ active: closestSection === technologies }">Technologies</Scroll>
+                    <Scroll to="technologies" :class="{ active: closestSection === technologies }">
+                        Technologies
+                    </Scroll>
                 </div>
             </nav>
 
@@ -37,7 +43,7 @@
                 <div class="container" v-html="project.introduction"></div>
             </section>
 
-            <section id="gallery" class="gallery" ref="gallery">
+            <section id="gallery" class="gallery" ref="gallery" v-if="project?.images?.length">
                 <div class="container">
                     <Carousel>
                         <div class="slide" v-for="image in project.images">
@@ -84,7 +90,7 @@
     import Spinner from '@/components/Spinner.vue';
     import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
     import { useRoute } from 'vue-router';
-    import { loading, projects, types } from '@/stores/projects';
+    import { isLoadingProjects, projects, types } from '@/stores/projects';
 
     const route = useRoute();
     const project = computed(() => projects.value.find(project => project.slug === route.params.project));

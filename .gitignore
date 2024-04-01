@@ -2,6 +2,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/adminer*
 /storage/*.key
 /vendor
 .env
@@ -17,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /coverage
+**/*\:Zone.Identifier

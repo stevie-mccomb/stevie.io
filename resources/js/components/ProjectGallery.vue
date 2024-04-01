@@ -26,7 +26,7 @@
                     </section>
                 </aside>
 
-                <div class="spinner" v-if="loading">
+                <div class="spinner" v-if="isLoadingProjects">
                     <span class="fa-light fa-trillium fa-spin"></span>
                 </div>
 
@@ -36,7 +36,7 @@
                             <div class="cell-padding">
                                 <router-link :to="`/projects/${project.slug}`" class="tile">
                                     <div class="flip-container">
-                                        <div class="front" :style="{ backgroundImage: `url(${project.cover})` }">
+                                        <div class="front" :style="{ backgroundImage: `url(${project.cover_url})` }">
                                             <span class="overlay">
                                                 <span class="project-name">
                                                     {{ project.name }}
@@ -91,7 +91,7 @@
     import useFetcher from '@/composables/useFetcher';
     import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
     import { computed, onMounted, ref } from 'vue';
-    import { loading, projects } from '@/stores/projects';
+    import { isLoadingProjects, projects } from '@/stores/projects';
 
     const props = defineProps({
         intro: {
@@ -140,8 +140,6 @@
                 return intersection.length > 0;
             });
         }
-
-        console.log(filtered);
 
         return filtered;
     });

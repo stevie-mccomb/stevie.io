@@ -1,7 +1,11 @@
+import AdminProjectCreate from '@/views/admin/projects/Create.vue';
 import AdminProjectIndex from '@/views/admin/projects/Index.vue';
+import AdminProjectEdit from '@/views/admin/projects/Edit.vue';
 import Contact from '@/views/Contact.vue';
 import Home from '@/views/Home.vue';
-import NotFound from '@/views/errors/NotFound.vue';
+import Login from '@/views/auth/Login.vue';
+import Logout from '@/views/auth/Logout.vue';
+import e404 from '@/views/errors/e404.vue';
 import Project from '@/views/Project.vue';
 import ProjectIndex from '@/views/ProjectIndex.vue';
 
@@ -12,7 +16,22 @@ export default [
     { // 404 - Not Found
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: NotFound
+        component: e404,
+    },
+
+    /**
+     * Auth Routes
+     */
+    {
+        name: 'login',
+        path: '/login',
+        component: Login,
+    },
+
+    {
+        name: 'logout',
+        path: '/logout',
+        component: Logout,
     },
 
     /**
@@ -20,7 +39,7 @@ export default [
      */
     {
         path: '/admin',
-        redirect: '/admin/projects'
+        redirect: '/admin/projects',
     },
 
     {
@@ -30,9 +49,15 @@ export default [
     },
 
     {
-        name: 'admin.users.index',
-        path: '/admin/users',
-        component: null,
+        name: 'admin.projects.edit',
+        path: '/admin/projects/:slug/edit',
+        component: AdminProjectEdit,
+    },
+
+    {
+        name: 'admin.projects.create',
+        path: '/admin/projects/create',
+        component: AdminProjectCreate,
     },
 
     /**
@@ -42,21 +67,21 @@ export default [
         name: 'home',
         path: '/',
         component: Home,
-        meta: { headerless: true }
+        meta: { headerless: true },
     },
     {
         name: 'projects.index',
         path: '/projects',
-        component: ProjectIndex
+        component: ProjectIndex,
     },
     {
         name: 'projects.show',
         path: '/projects/:project',
-        component: Project
+        component: Project,
     },
     {
         name: 'contact',
         path: '/contact',
-        component: Contact
+        component: Contact,
     },
 ];
