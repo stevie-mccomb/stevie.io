@@ -17,7 +17,7 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if (auth()->attempt($credentials)) {
+        if (auth()->attempt($credentials, $request->filled('remember_me'))) {
             $request->session()->regenerate();
 
             return response()->json([

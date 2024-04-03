@@ -1,6 +1,6 @@
 <template>
     <div class="carousel" ref="root" tabindex="0" :data-background-color="backgroundColor">
-        <div class="rack" :style="{ width: `${slides.length * 100}%`, marginLeft: `-${currentSlideIndex * 100}%` }">
+        <div ref="rack" class="rack" :style="{ width: `${slides.length * 100}%`, marginLeft: `-${currentSlideIndex * 100}%` }">
             <slot></slot>
         </div>
 
@@ -69,6 +69,8 @@
 
     const currentSlideIndex = ref(0);
     const root = ref(null);
+    const rack = ref(null);
+    const slideTemplate = ref(null);
     const toggleButton = ref(null);
     const input = ref(null);
     const timeout = ref(0);

@@ -1,13 +1,46 @@
+<template>
+    <div class="app-header" :class="{ headerless }">
+        <div class="container">
+            <router-link to="/">
+                <h2>Stevie McComb</h2>
+            </router-link>
+
+            <nav class="app-navigation">
+                <router-link to="/">Home</router-link>
+
+                <router-link to="/projects">Projects</router-link>
+
+                <router-link to="/contact">Contact</router-link>
+            </nav>
+        </div>
+    </div>
+</template>
+
+<script setup>
+    const props = defineProps({
+        headerless: {
+            type: Boolean,
+            default: false,
+        },
+    });
+</script>
+
 <style lang="scss" scoped>
-    @import '../../scss/master/variables';
+    @import '~/master/variables';
 
     .app-header {
-        position: absolute;
+        position: sticky;
         top: 0;
         left: 0;
+        z-index: 10;
         width: 100%;
         background: white;
         box-shadow: $shadow;
+        transition: transform 0.25s ease;
+
+        &.headerless {
+            transform: translateY(-100%);
+        }
     }
 
     .container {
@@ -34,21 +67,3 @@
         gap: 1rem;
     }
 </style>
-
-<template>
-    <div class="app-header">
-        <div class="container">
-            <router-link to="/">
-                <h2>Stevie McComb</h2>
-            </router-link>
-
-            <nav class="app-navigation">
-                <router-link to="/">Home</router-link>
-
-                <router-link to="/projects">Projects</router-link>
-
-                <router-link to="/contact">Contact</router-link>
-            </nav>
-        </div>
-    </div>
-</template>

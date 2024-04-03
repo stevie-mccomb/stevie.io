@@ -16,6 +16,12 @@
 
                 <input id="password" name="password" type="password" v-model="password">
             </div>
+
+            <div class="form-group">
+                <Checkbox name="remember_me">
+                    Remember me (for 2 weeks)
+                </Checkbox>
+            </div>
         </template>
 
         <template v-slot:footer>
@@ -27,6 +33,7 @@
 </template>
 
 <script setup>
+    import Checkbox from '@/components/Checkbox.vue';
     import axios from '@/composables/useAxios';
     import useCsrfToken from '@/composables/useCsrfToken';
     import Layout from '@/views/auth/Layout.vue';

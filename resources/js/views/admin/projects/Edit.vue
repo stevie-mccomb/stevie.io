@@ -27,14 +27,16 @@
     const project = ref({});
     const isSubmitting = ref(false);
 
-    const submit = async e => {
+    const submit = async (e, data) => {
         if (isSubmitting.value) return;
         isSubmitting.value = true;
 
-        const data = new FormData(e.target);
+        // const data = new FormData(e.target);
         const updatedProject = await updateProject(project.value, data);
 
         project.value = updatedProject;
+
+        isSubmitting.value = false;
 
         router.replace({
             name: 'admin.projects.edit',
@@ -42,8 +44,6 @@
                 slug: project.value.slug,
             },
         });
-
-        isSubmitting.value = false;
     };
 
     onMounted(() => {

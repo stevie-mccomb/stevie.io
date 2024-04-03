@@ -6,10 +6,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/components/App.vue';
 import routes from '@/routes';
 
+
 window.app = createApp(App);
+
 window.router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return savedPosition || { top: 0 };
+    },
 });
 
 app.use(router);

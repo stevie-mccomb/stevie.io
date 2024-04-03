@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectImage;
 use App\Models\ProjectType;
 use App\Http\Requests\Projects\DeleteRequest;
 use App\Http\Requests\Projects\StoreRequest;
 use App\Http\Requests\Projects\UpdateRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -19,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index(): JsonResponse
     {
-        $projects = Project::with(['technologies', 'type'])->orderBy('name')->get();
+        $projects = Project::with([ 'images', 'technologies', 'type' ])->orderBy('name')->get();
 
         return response()->json($projects);
 
@@ -294,11 +296,38 @@ class ProjectController extends Controller
             $project = Project::create($data);
         }
 
+        $imageIds = [];
+        if (!empty($data['images'])) {
+            foreach ($data['images'] as $id => $imageData) {
+                $imageIds[] = $id;
+                $imageDelta = [
+                    'title' => $imageData['title'],
+                    'caption' => $imageData['caption'],
+                    'sort_order' => $imageData['sort_order'],
+                ];
+
+                if (!empty($imageData['file'])) {
+                    $imagePath = $imageData['file']->store('projects/images', 'public');
+                    $imageDelta['path'] = $imagePath;
+                    $imageDelta['url'] = Storage::url($imagePath);
+                }
+
+                if (is_numeric($id)) {
+                    $image = ProjectImage::where('id', $id)->first();
+                    $image->update($imageDelta);
+                } else {
+                    $project->images()->create($imageDelta);
+                }
+            }
+        }
+
+        $project->images()->whereNotIn('project_images.id', $imageIds)->delete();
+
         $project->refresh();
 
-        $project->technologies()->sync($request->safe()->technologies);
+        $project->technologies()->sync($request->safe()->technologies ?? []);
 
-        $project->load([ 'technologies', 'type' ]);
+        $project->load([ 'images', 'technologies', 'type' ]);
 
         return $project;
     }

@@ -6,6 +6,7 @@ button {
 }
 
 .button {
+    cursor: pointer;
     display: inline-block;
     color: white;
     font-size: 1rem;
@@ -23,13 +24,19 @@ button {
         background: transparent;
     }
 
-    &:hover {
-        box-shadow: $shadow-darker;
-        transform: translateY(-0.25rem);
+    &:not([disabled]) {
+        &:hover {
+            box-shadow: $shadow-darker;
+            transform: translateY(-0.25rem);
+        }
+
+        &:hover.outline {
+            color: white;
+            background: black;
+        }
     }
 
-    &:hover.outline {
-        color: white;
-        background: black;
+    &[disabled] {
+        opacity: 0.25;
     }
 }

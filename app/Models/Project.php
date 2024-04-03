@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,6 +40,14 @@ class Project extends Model
         'summary',
         'introduction',
     ];
+
+    /**
+     * Return this project's images.
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProjectImage::class)->orderBy('project_images.sort_order');
+    }
 
     /**
      * Return the technologies used on this project.
@@ -96,6 +105,11 @@ class Project extends Model
             'introduction' => 'required|string',
             'technologies' => 'nullable|array',
             'technologies.*' => 'required|integer|exists:technologies,id',
+            'images' => 'nullable|array',
+            'images.*.title' => 'required|string|max:255',
+            'images.*.caption' => 'required|string',
+            'images.*.file' => 'nullable|image|max:2500000',
+            'images.*.sort_order' => 'nullable|integer|min:-999|max:999',
         ];
 
         if (!empty($this->id)) {

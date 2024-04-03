@@ -33,7 +33,7 @@
                         Gallery
                     </Scroll>
 
-                    <Scroll to="technologies" :class="{ active: closestSection === technologies }">
+                    <Scroll to="technologies" :class="{ active: closestSection === technologies }" v-if="project?.technologies?.length">
                         Technologies
                     </Scroll>
                 </div>
@@ -48,16 +48,22 @@
                     <Carousel>
                         <div class="slide" v-for="image in project.images">
                             <div class="slide-image">
-                                <img :src="image.src" :alt="image.alt">
+                                <img :src="image.url" :alt="image.title">
                             </div>
 
-                            <div class="slide-copy" v-html="image.summary"></div>
+                            <div class="slide-copy">
+                                <h2>
+                                    {{ image.title }}
+                                </h2>
+
+                                <p v-html="image.caption"></p>
+                            </div>
                         </div>
                     </Carousel>
                 </div>
             </section>
 
-            <section id="technologies" class="technologies" ref="technologies">
+            <section id="technologies" class="technologies" ref="technologies" v-if="project?.technologies?.length">
                 <div class="container">
                     <h2>Technologies</h2>
 
