@@ -1,7 +1,9 @@
 /**
- * Colors
+ * Breakpoints
  */
-// $color-primary: #00a6ef;
+$breakpoint-mobile: 639px;
+$breakpoint-tablet: 959px;
+$breakpoint-legacy: 1279px;
 
 /**
  * Shadows

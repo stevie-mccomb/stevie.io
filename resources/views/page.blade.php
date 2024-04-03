@@ -20,7 +20,18 @@
     <div id="app" class="app"></div>
 
     <script>
-        window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+        window.Laravel = {
+            csrfToken: '{{ csrf_token() }}',
+            config: {
+                services: {
+                    google: {
+                        recaptcha: {
+                            site_key: '{{ config('services.google.recaptcha.site_key') }}',
+                        },
+                    },
+                },
+            },
+        };
         window.User = JSON.parse('<?php echo auth()->check() ? auth()->user()->toJson() : 'null'; ?>');
     </script>
     @vite('resources/js/app.js')

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProjectController;
@@ -32,6 +33,7 @@ Route::group(['prefix' => 'async', 'as' => 'async.'], function () {
     Route::patch('projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('technologies', [TechnologyController::class, 'index'])->name('technologies.index');
+    Route::post('contact', [ContactController::class, 'send'])->name('contact.send');
 });
 
 /**
