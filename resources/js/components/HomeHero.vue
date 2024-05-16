@@ -14,11 +14,15 @@
             </Transition>
 
             <Transition @after-enter="++animationStep">
-                <h3 v-show="animationStep > 2" :class="{ loaded: animationStep > 2 }">LAMP Stack</h3>
+                <span v-show="animationStep > 2" :class="{ loaded: animationStep > 2 }" class="fal fa-rocket-launch"></span>
             </Transition>
 
             <Transition @after-enter="++animationStep">
-                <h4 v-show="animationStep > 2" :class="{ loaded: animationStep > 2 }">Linux, Apache, MySQL, PHP</h4>
+                <h3 v-show="animationStep > 3" :class="{ loaded: animationStep > 3 }">LAMP Stack</h3>
+            </Transition>
+
+            <Transition @after-enter="++animationStep">
+                <h4 v-show="animationStep > 4" :class="{ loaded: animationStep > 4 }">Linux, Apache, MySQL, PHP</h4>
             </Transition>
         </div>
 
@@ -37,8 +41,8 @@
 <script setup>
     import '@/prototypes/Array';
     import '@/prototypes/Number';
-    import { randomBoolean, randomFloat, randomInt } from '@/helpers/math';
-    import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
+    import { randomFloat, randomInt } from '@/helpers/math';
+    import { computed, onMounted, onUnmounted, ref } from 'vue';
 
     const loaded = ref(false);
     const canvas = ref(null);
@@ -143,6 +147,9 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '~/master/variables';
+    @import '~/master/mixins';
+
     .home-hero-component {
         background: black;
         text-align: center;
@@ -165,7 +172,7 @@
         box-sizing: border-box;
     }
 
-    h1, h2, h3, h4, h5 {
+    h1, h2, h3, h4, h5, .fa-rocket-launch {
         color: white;
         margin-bottom: 1rem;
         opacity: 0;
@@ -184,17 +191,40 @@
         font-weight: 300;
         margin-bottom: 2rem;
         letter-spacing: 0.32rem;
+        @include breakpoint-mobile {
+            font-size: 2rem;
+        }
     }
 
     h2 {
         font-size: 2rem;
         font-weight: 800;
         margin-bottom: 1rem;
+        @include breakpoint-mobile {
+            font-size: 1.25rem;
+        }
     }
 
     h3 {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
+        @include breakpoint-mobile {
+            font-size: 1.25rem;
+        }
+    }
+
+    @keyframes flying {
+        0% { transform: translateY(-0.25rem); }
+        50% { transform: translateY(0.25rem); }
+        100% { transform: translateY(-0.25rem); }
+    }
+
+    .fa-rocket-launch {
+        font-size: 2rem;
+        animation: flying infinite 2s ease-in-out;
+        @include breakpoint-mobile {
+            font-size: 1.5rem;
+        }
     }
 
     h4 {
@@ -223,6 +253,7 @@
         width: 100%;
         height: 8rem;
         transition: transform 0.5s ease;
+        overflow: hidden;
     }
 
     svg {
@@ -231,6 +262,16 @@
         bottom: 0;
         left: 0;
         width: 100%;
+        @include breakpoint-legacy {
+            transform: scale(2);
+            height: 8rem;
+        }
+        @include breakpoint-tablet {
+            transform: scale(3);
+        }
+        @include breakpoint-mobile {
+            transform: scale(5);
+        }
     }
 
     svg path {
@@ -262,7 +303,7 @@
     }
 
     @keyframes bounce {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(0.5rem); }
+        0% { transform: translate(-50%, 0); }
+        100% { transform: translate(-50%, 0.5rem); }
     }
 </style>

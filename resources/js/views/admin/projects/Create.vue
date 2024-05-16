@@ -3,7 +3,7 @@
         <div class="project-create view">
             <h1>Create Project</h1>
 
-            <Form
+            <ProjectForm
                 :project="project"
                 :is-submitting="isSubmitting"
                 @submit="submit"
@@ -14,28 +14,32 @@
 
 <script setup>
     import AdminLayout from '@/views/admin/AdminLayout.vue';
-    import Form from '@/views/admin/projects/Form.vue';
+    import ProjectForm from '@/views/admin/projects/Form.vue';
     import { storeProject } from '@/stores/projects';
-    import { reactive, ref } from 'vue';
+    import { ref } from 'vue';
 
-    const project = reactive({
+    const project = ref({
         type: {},
+        introduction: '',
         technology_ids: [],
     });
     const isSubmitting = ref(false);
 
-    const submit = async e => {
+    const submit = async (e, data) => {
         if (isSubmitting.value) return;
         isSubmitting.value = true;
 
-        const data = new FormData(e.target);
+        // const data = new FormData(e.target);
+        // for (const entry of data.entries()) {
+        //     console.log(entry);
+        // }
 
-        const project = await storeProject(data);
+        const updatedProject = await storeProject(data).finally(() => isSubmitting.value = false);
 
         router.push({
             name: 'admin.projects.edit',
             params: {
-                slug: project.slug,
+                slug: updatedProject.slug,
             },
         });
 

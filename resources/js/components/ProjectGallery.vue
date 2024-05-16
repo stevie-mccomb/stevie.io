@@ -91,7 +91,7 @@
     import useFetcher from '@/composables/useFetcher';
     import { syncQueryParam, useQueryString } from '@/composables/useQueryString';
     import { computed, onMounted, ref } from 'vue';
-    import { isLoadingProjects, projects } from '@/stores/projects';
+    import { isLoadingProjects, projects, types } from '@/stores/projects';
 
     const props = defineProps({
         intro: {
@@ -99,25 +99,6 @@
             default: ''
         }
     });
-
-    const types = [
-        {
-            name: 'Web App',
-            icon: 'fa-code-fork'
-        },
-        {
-            name: 'Website',
-            icon: 'fa-desktop'
-        },
-        {
-            name: 'Mobile App',
-            icon: 'fa-mobile'
-        },
-        {
-            name: 'Video Game',
-            icon: 'fa-gamepad'
-        }
-    ];
     const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
     syncQueryParam('types', selectedTypes);
 
@@ -152,6 +133,7 @@
 
 <style lang="scss" scoped>
     @import '../../scss/master/variables';
+    @import '../../scss/master/mixins';
 
     .intro {
         color: #666;
@@ -161,8 +143,8 @@
     .sidebar-and-grid-container {
         display: flex;
         gap: 2rem;
-        @media (max-width: 639px) {
-            flex-direction: column;
+        @include breakpoint-mobile {
+            flex-direction: column-reverse;
             gap: 1rem;
         }
     }
@@ -186,23 +168,31 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
-        position: relative;
-        @media (max-width: 1199px) {
+        @include breakpoint-legacy {
             grid-template-columns: 1fr 1fr 1fr;
         }
-        @media (max-width: 959px) {
+        @include breakpoint-tablet {
             grid-template-columns: 1fr 1fr;
         }
-        @media (max-width: 479px) {
+        @include breakpoint-mobile {
             grid-template-columns: 1fr;
         }
     }
 
-    .cell-padding {
-        width: 100%;
-        height: 0;
-        padding-bottom: 100%;
+    .cell {
         position: relative;
+        max-height: 32rem;
+        @include breakpoint-mobile {
+            min-height: 24rem;
+        }
+    }
+
+    .cell-padding {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .tile {

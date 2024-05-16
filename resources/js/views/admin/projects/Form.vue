@@ -58,8 +58,6 @@
             <label for="introduction">Introduction <span class="form-required">*</span></label>
 
             <Editor ref="introduction" v-model="project.introduction" />
-
-            <!-- <textarea name="introduction" v-model="introductionString" style="display: none;"></textarea> -->
         </div>
 
         <div class="form-group" v-if="project?.id">
@@ -85,7 +83,6 @@
 </template>
 
 <script setup>
-    import Carousel from '@/components/Carousel.vue';
     import Editor from '@/components/Editor.vue';
     import ProjectImageManager from '@/components/ProjectImageManager.vue';
     import Slug from '@/components/Slug.vue';
@@ -107,25 +104,27 @@
         },
     });
 
+    console.log(props.project);
+
     const form = ref(null);
     const introduction = ref(null);
     const projectImageManager = ref(null);
-    const introductionString = ref(props.project.introduction);
     const isSubmitting = ref(false);
 
     const submit = async e => {
         const data = new FormData(form.value);
 
         data.append('introduction', introduction.value.editor.getHTML());
-        // introductionString.value = introduction.value.editor.getHTML();
 
-        for (let i = 0; i < projectImageManager.value.images.length; ++i) {
-            const image = projectImageManager.value.images[i];
-            data.append(`images[${image.id}][id]`, image.id);
-            data.append(`images[${image.id}][title]`, image.title);
-            data.append(`images[${image.id}][caption]`, image.caption);
-            if (image.file) data.append(`images[${image.id}][file]`, image.file);
-            data.append(`images[${image.id}][sort_order]`, i + 1);
+        if (projectImageManager.value?.images?.length) {
+            for (let i = 0; i < projectImageManager.value.images.length; ++i) {
+                const image = projectImageManager.value.images[i];
+                data.append(`images[${image.id}][id]`, image.id);
+                data.append(`images[${image.id}][title]`, image.title);
+                data.append(`images[${image.id}][caption]`, image.caption);
+                if (image.file) data.append(`images[${image.id}][file]`, image.file);
+                data.append(`images[${image.id}][sort_order]`, i + 1);
+            }
         }
 
         await nextTick();

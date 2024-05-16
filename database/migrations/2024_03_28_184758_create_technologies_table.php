@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('purpose');
             $table->string('image');
+            $table->boolean('primary')->default(0);
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent();
         });

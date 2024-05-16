@@ -22,7 +22,9 @@ class ProjectTypesTableSeeder extends Seeder
                 (1, 'Web App', 'web-app', 'fa-code-fork'),
                 (2, 'Website', 'website', 'fa-desktop'),
                 (3, 'Mobile App', 'mobile-app', 'fa-mobile'),
-                (4, 'Video Game', 'video-game', 'fa-gamepad')
+                (4, 'Video Game', 'video-game', 'fa-gamepad'),
+                (5, 'Game Engine', 'game-engine', 'fa-engine'),
+                (6, 'Framework', 'framework', 'fa-screwdriver-wrench')
             ON DUPLICATE KEY UPDATE
                 `name` = VALUES(`name`),
                 `slug` = VALUES(`slug`),

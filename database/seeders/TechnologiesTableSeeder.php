@@ -168,6 +168,27 @@ class TechnologiesTableSeeder extends Seeder
                     'Back-end Testing',
                     'https://pestphp.com/',
                     '/img/technology-logos/pest.svg'
+                ),
+                
+                (
+                    'TypeScript',
+                    'Front-end Scripting',
+                    'https://www.typescriptlang.org/',
+                    '/img/technology-logos/typescript.svg'
+                ),
+                
+                (
+                    'Cordova',
+                    'Mobile App Framework',
+                    'https://cordova.apache.org/',
+                    '/img/technology-logos/cordova.png'
+                ),
+                
+                (
+                    'Godot',
+                    'Game Engine',
+                    'https://godotengine.org/',
+                    '/img/technology-logos/godot.svg'
                 )
             ON DUPLICATE KEY UPDATE
                 `name` = VALUES(`name`),

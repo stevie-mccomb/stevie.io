@@ -22,6 +22,14 @@ export const types = [
     {
         name: 'Video Game',
         icon: 'fa-gamepad'
+    },
+    {
+        name: 'Game Engine',
+        icon: 'fa-engine'
+    },
+    {
+        name: 'Framework',
+        icon: 'fa-screwdriver-wrench'
     }
 ];
 

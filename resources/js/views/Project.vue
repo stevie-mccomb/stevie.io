@@ -144,6 +144,7 @@
 
 <style lang="scss" scoped>
     @import '~/master/variables';
+    @import '~/master/mixins';
 
     section {
         padding: 4rem 0;
@@ -171,7 +172,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(90deg, rgb(0 0 0 / 50%) 50%, transparent);
+            background-image: linear-gradient(90deg, rgb(0 0 0 / 75%) 50%, transparent);
         }
 
         .container {
@@ -193,7 +194,7 @@
     nav {
         padding: 1rem 0;
         position: sticky;
-        top: 0;
+        top: 4rem;
         border-bottom: 1px solid darken(white, 10%);
         background: white;
         z-index: 1;
@@ -202,6 +203,10 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
+            @include breakpoint-mobile {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
         }
 
         a {
@@ -212,6 +217,9 @@
             color: black;
             text-decoration: none;
             transition: color 0.25s ease, background 0.25s ease;
+            @include breakpoint-tablet {
+                padding: 0.5rem 1rem;
+            }
 
             &:hover, &.active {
                 color: white;
@@ -227,6 +235,9 @@
 
     .slide {
         display: flex;
+        @include breakpoint-tablet {
+            flex-direction: column;
+        }
     }
 
     .slide-image {
@@ -246,6 +257,10 @@
     .slide-copy {
         max-width: 50%;
         padding: 2rem;
+        @include breakpoint-tablet {
+            max-width: 72ch;
+            margin: 0 auto;
+        }
 
         &:deep(h2) {
             font-size: 2rem;

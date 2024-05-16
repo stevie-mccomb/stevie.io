@@ -299,7 +299,6 @@ class ProjectController extends Controller
         $imageIds = [];
         if (!empty($data['images'])) {
             foreach ($data['images'] as $id => $imageData) {
-                $imageIds[] = $id;
                 $imageDelta = [
                     'title' => $imageData['title'],
                     'caption' => $imageData['caption'],
@@ -316,8 +315,10 @@ class ProjectController extends Controller
                     $image = ProjectImage::where('id', $id)->first();
                     $image->update($imageDelta);
                 } else {
-                    $project->images()->create($imageDelta);
+                    $image = $project->images()->create($imageDelta);
                 }
+
+                $imageIds[] = $image->id;
             }
         }
 

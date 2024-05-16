@@ -70,7 +70,6 @@
     const currentSlideIndex = ref(0);
     const root = ref(null);
     const rack = ref(null);
-    const slideTemplate = ref(null);
     const toggleButton = ref(null);
     const input = ref(null);
     const timeout = ref(0);
@@ -99,7 +98,7 @@
         currentSlideIndex.value = slides.value.length - 1;
     };
 
-    const previous = auto => {
+    const previous = () => {
         pause();
         if (!canGoPrevious.value) return;
         if (--currentSlideIndex.value < 0) currentSlideIndex.value = slides.value.length - 1;
@@ -127,17 +126,17 @@
         }
     };
 
-    const onInputFocus = e => selectElementContents(input.value);
+    const onInputFocus = () => selectElementContents(input.value);
 
-    const onInput = e => {
-        let value = parseInt(input.value.innerText.replace(/\D/, ''));
+    const onInput = () => {
+        let value = parseInt(input.value.innerText.toString().replace(/\D/, ''));
         if (isNaN(value)) value = 1;
         value = value.clamp(1, slides.value.length);
 
         currentSlideIndex.value = value - 1;
         input.value.innerText = value;
 
-        input.value.innerText.length > 1 ? cursorToEnd(input.value) : selectElementContents(input.value);
+        input.value.innerText.toString().length > 1 ? cursorToEnd(input.value) : selectElementContents(input.value);
         pause();
     };
 
@@ -260,10 +259,7 @@
         align-self: center;
         border: 2px solid black;
         width: fit-content;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 1rem;
-        border-bottom-right-radius: 1rem;
+        border-radius: 0 0 1rem 1rem;
         margin-top: -2px;
         padding: 0.5rem;
 

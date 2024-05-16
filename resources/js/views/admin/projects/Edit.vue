@@ -3,7 +3,7 @@
         <div class="project-edit view">
             <h1>Edit Project</h1>
 
-            <Form
+            <ProjectForm
                 v-if="project?.id"
                 :project="project"
                 :is-submitting="isSubmitting"
@@ -17,9 +17,9 @@
 
 <script setup>
     import AdminLayout from '@/views/admin/AdminLayout.vue';
-    import Form from '@/views/admin/projects/Form.vue';
+    import ProjectForm from '@/views/admin/projects/Form.vue';
     import useErrors from '@/composables/useErrors';
-    import { onProjectsLoaded, getProject, updateProject } from '@/stores/projects';
+    import { getProject, updateProject } from '@/stores/projects';
     import { onMounted, ref } from 'vue';
 
     const { abort } = useErrors();
@@ -32,11 +32,8 @@
         isSubmitting.value = true;
 
         // const data = new FormData(e.target);
-        const updatedProject = await updateProject(project.value, data);
 
-        project.value = updatedProject;
-
-        isSubmitting.value = false;
+        project.value = await updateProject(project.value, data).finally(() => isSubmitting.value = false);
 
         router.replace({
             name: 'admin.projects.edit',
