@@ -16,8 +16,8 @@ return [
 
     'google' => [
         'recaptcha' => [
-            'site_key' => env('GOOGLE_RECPATCHA_SITE_KEY'),
-            'secret_key' => env('GOOGLE_RECPATCHA_SECRET_KEY'),
+            'site_key' => env('GOOGLE_RECAPTCHA_SITE_KEY'),
+            'secret_key' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
             'threshold' => 0.5,
         ],
     ],

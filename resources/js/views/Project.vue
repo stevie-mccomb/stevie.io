@@ -173,6 +173,10 @@
             width: 100%;
             height: 100%;
             background-image: linear-gradient(90deg, rgb(0 0 0 / 75%) 50%, transparent);
+            @include breakpoint-tablet {
+                background-image: none;
+                background-color: rgb(0 0 0 / 75%);
+            }
         }
 
         .container {

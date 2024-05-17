@@ -10,7 +10,11 @@
 
         <section class="form">
             <div class="container">
-                <form @submit.prevent="submit">
+                <p v-if="successMessage.length">
+                    {{ successMessage }}
+                </p>
+
+                <form @submit.prevent="submit" v-else>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="first_name">First Name <span class="form-required">*</span></label>
@@ -71,46 +75,62 @@
 <script setup>
     import FormError from '@/components/FormError.vue';
     import axios from '@/composables/useAxios';
+    import useRecaptcha from '@/composables/useRecaptcha';
     import { reactive, ref } from 'vue';
+    import { onProjectsLoaded } from '@/stores/projects';
 
+    const successMessage = ref('');
     const isSending = ref(false);
 
     const errors = ref({});
     const fields = reactive({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        message: '',
+        'first_name': '',
+        'last_name': '',
+        'email': '',
+        'phone': '',
+        'message': '',
+        'g-recaptcha-response': '',
     });
+    const heroImage = ref('');
 
-    const submit = e => {
+    const submit = async () => {
         if (isSending.value) return;
         isSending.value = true;
 
+        const { token } = await useRecaptcha();
+        fields['g-recaptcha-response'] = token;
+
         axios.post('/async/contact', fields)
-            .then(console.log)
+            .then(response => successMessage.value = response.data.message)
             .catch(e => {
                 if (e?.response?.data?.errors) {
                     errors.value = e.response.data.errors;
                 }
-
-                console.error(e);
             })
             .then(() => isSending.value = false);
     };
+
+    onProjectsLoaded(projects => {
+        heroImage.value = projects.random().hero_url;
+    });
 </script>
 
 <style lang="scss" scoped>
+    @import '~/master/variables';
+    @import '~/master/mixins';
+
     section {
         padding: 4rem 0;
     }
 
     .hero {
         position: relative;
-        background-image: url('https://source.unsplash.com/random/1920x480');
+        background-image: url('/img/contact-hero.webp');
         background-position: center;
         background-size: cover;
+        @include breakpoint-tablet {
+            background-position: 75%;
+        }
 
         &::before {
             content: ' ';
@@ -121,6 +141,10 @@
             width: 100%;
             height: 100%;
             background-image: linear-gradient(90deg, rgb(0 0 0 / 50%) 50%, transparent);
+            @include breakpoint-tablet {
+                background-image: none;
+                background-color: rgb(0 0 0 / 75%);
+            }
         }
 
         h1, p {

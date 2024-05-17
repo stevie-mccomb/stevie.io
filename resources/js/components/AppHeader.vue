@@ -1,7 +1,7 @@
 <template>
     <div class="app-header" :class="{ headerless }" ref="root">
         <div class="container">
-            <router-link to="/">
+            <router-link to="/" class="site-title-link">
                 <h2>Stevie McComb</h2>
             </router-link>
 
@@ -71,6 +71,11 @@
         &.headerless {
             transform: translateY(-100%);
         }
+    }
+
+    .site-title-link {
+        border-bottom: 0;
+        text-decoration: none;
     }
 
     .container {

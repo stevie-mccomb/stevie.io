@@ -270,7 +270,7 @@
             transform: scale(3);
         }
         @include breakpoint-mobile {
-            transform: scale(5);
+            transform: scale(6);
         }
     }
 

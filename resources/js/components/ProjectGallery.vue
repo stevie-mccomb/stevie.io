@@ -1,7 +1,9 @@
 <template>
     <div class="project-gallery-component">
         <div class="container">
-            <p class="intro" v-if="intro?.length">{{ intro }}</p>
+            <div class="intro" v-if="$slots.intro">
+                <slot name="intro"></slot>
+            </div>
 
             <div class="sidebar-and-grid-container">
                 <aside class="sidebar">
@@ -99,7 +101,7 @@
             default: ''
         }
     });
-    const selectedTypes = ref(useQueryString.types || types.map(type => type.name));
+    const selectedTypes = ref(useQueryString.types);
     syncQueryParam('types', selectedTypes);
 
     const technologyFetcher = useFetcher('/async/technologies');
@@ -125,10 +127,7 @@
         return filtered;
     });
 
-    onMounted(async () => {
-        technologies.value = await technologyFetcher.fetch();
-        // selectedTechnologies.value = technologies.value.map(tech => tech.id);
-    });
+    onMounted(async () => technologies.value = await technologyFetcher.fetch());
 </script>
 
 <style lang="scss" scoped>
@@ -137,7 +136,11 @@
 
     .intro {
         color: #666;
-        margin: 0 auto 2rem auto;
+
+        :deep(p) {
+            display: block;
+            margin: 0 auto 2rem auto;
+        }
     }
 
     .sidebar-and-grid-container {
