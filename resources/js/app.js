@@ -16,6 +16,10 @@ window.router = createRouter({
     },
 });
 
+window.router.beforeEach((to, from) => {
+    document.title = (!!to.meta.title) ? `${to.meta.title} | Stevie McComb` : 'Stevie McComb';
+});
+
 app.use(router);
 
 app.mount('#app');

@@ -96,10 +96,13 @@
     import Spinner from '@/components/Spinner.vue';
     import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
     import { useRoute } from 'vue-router';
-    import { isLoadingProjects, projects, types } from '@/stores/projects';
+    import { isLoadingProjects, projects, onProjectsLoaded } from '@/stores/projects';
 
     const route = useRoute();
     const project = computed(() => projects.value.find(project => project.slug === route.params.project));
+    onProjectsLoaded(() => {
+        document.title = `${project.value.name} | Stevie McComb`;
+    });
 
     const root = ref(null);
     const introduction = ref(null);

@@ -101,7 +101,7 @@
             default: ''
         }
     });
-    const selectedTypes = ref(useQueryString.types);
+    const selectedTypes = ref(useQueryString.types ?? []);
     syncQueryParam('types', selectedTypes);
 
     const technologyFetcher = useFetcher('/async/technologies');
@@ -208,6 +208,7 @@
         height: 100%;
         box-sizing: border-box;
         border-radius: 0.25rem;
+        border-bottom: 0;
         text-decoration: none;
         transform: translateY(0);
         transition: transform 0.5s ease;

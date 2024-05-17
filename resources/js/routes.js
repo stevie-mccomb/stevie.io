@@ -17,6 +17,9 @@ export default [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: e404,
+        meta: {
+            title: '404',
+        },
     },
 
     /**
@@ -26,12 +29,18 @@ export default [
         name: 'login',
         path: '/login',
         component: Login,
+        meta: {
+            title: 'Login',
+        },
     },
 
     {
         name: 'logout',
         path: '/logout',
         component: Logout,
+        meta: {
+            title: 'Logout',
+        },
     },
 
     /**
@@ -46,18 +55,27 @@ export default [
         name: 'admin.projects.index',
         path: '/admin/projects',
         component: AdminProjectIndex,
+        meta: {
+            title: 'Admin - Projects',
+        },
     },
 
     {
         name: 'admin.projects.edit',
         path: '/admin/projects/:slug/edit',
         component: AdminProjectEdit,
+        meta: {
+            title: 'Admin - Edit Project',
+        },
     },
 
     {
         name: 'admin.projects.create',
         path: '/admin/projects/create',
         component: AdminProjectCreate,
+        meta: {
+            title: 'Admin - Create Project',
+        },
     },
 
     /**
@@ -67,12 +85,17 @@ export default [
         name: 'home',
         path: '/',
         component: Home,
-        meta: { headerless: true },
+        meta: {
+            headerless: true,
+        },
     },
     {
         name: 'projects.index',
         path: '/projects',
         component: ProjectIndex,
+        meta: {
+            title: 'Projects'
+        },
     },
     {
         name: 'projects.show',
@@ -83,5 +106,8 @@ export default [
         name: 'contact',
         path: '/contact',
         component: Contact,
+        meta: {
+            title: 'Contact',
+        },
     },
 ];
