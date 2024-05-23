@@ -18,6 +18,8 @@
 
                 <router-link to="/projects">Projects</router-link>
 
+                <router-link to="/resume">Résumé</router-link>
+
                 <router-link to="/contact">Contact</router-link>
             </nav>
         </div>
@@ -67,6 +69,9 @@
         background: white;
         box-shadow: $shadow;
         transition: transform 0.25s ease;
+        @media print {
+            display: none;
+        }
 
         &.headerless {
             transform: translateY(-100%);

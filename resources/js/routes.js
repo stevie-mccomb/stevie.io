@@ -8,6 +8,7 @@ import Logout from '@/views/auth/Logout.vue';
 import e404 from '@/views/errors/e404.vue';
 import Project from '@/views/Project.vue';
 import ProjectIndex from '@/views/ProjectIndex.vue';
+import Resume from '@/views/Resume.vue';
 
 export default [
     /**
@@ -108,6 +109,14 @@ export default [
         component: Contact,
         meta: {
             title: 'Contact',
+        },
+    },
+    {
+        name: 'resume',
+        path: '/resume',
+        component: Resume,
+        meta: {
+            title: 'Resume',
         },
     },
 ];
