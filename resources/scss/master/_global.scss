@@ -16,12 +16,10 @@ html, body {
 }
 
 a[href] {
-    color: transparent;
-    font-weight: 800;
-    background-image: linear-gradient(90deg, steelblue, darkblue 50%, limegreen calc(50% + 1px), yellowgreen);
+    color: $brand-primary;
     background-clip: text;
     background-size: 200%;
-    border-bottom: 1px solid yellowgreen;
+    border-bottom: 2px dotted $brand-primary;
     line-height: 1.5;
     text-decoration: none;
     transition: background-position 0.25s ease, border-color 0.25s ease;
@@ -78,4 +76,8 @@ a.main-content-skip {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+}
+
+.mb-0 {
+    margin-bottom: 0;
 }

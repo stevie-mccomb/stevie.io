@@ -115,6 +115,7 @@ export const deleteProject = project => {
 axios.get('/async/projects')
     .then(response => {
         projects.value = response.data;
+        console.log(projects.value);
         if (callbacks.length) {
             for (const callback of callbacks) {
                 callback(projects.value);

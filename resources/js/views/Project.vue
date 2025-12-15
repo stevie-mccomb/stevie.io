@@ -8,7 +8,7 @@
                     <h1>{{ project.name }}</h1>
 
                     <h2>
-                        <span class="fa-light" :class="project.type.icon"></span>
+                        <span class="fa-light" :class="project.type.icon" style="margin-right: 0.5rem;"></span>
 
                         {{ project.type.name }}
                     </h2>
@@ -17,8 +17,8 @@
                         {{ project.summary }}
                     </p>
 
-                    <a v-if="project?.url?.length" :href="project.url" target="_blank" class="button" style="margin-top: 2rem;">
-                        View Project <span class="fal fa-angle-right"></span>
+                    <a v-if="project?.url?.length" :href="project.url" target="_blank" class="success button" style="margin-top: 2rem;">
+                        View Project <span class="fal fa-long-arrow-right" style="margin-left: 1rem;"></span>
                     </a>
                 </div>
             </section>

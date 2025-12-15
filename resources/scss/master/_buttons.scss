@@ -17,11 +17,17 @@ button {
     border-radius: 10rem;
     box-shadow: $shadow-none;
     transform: translateY(0);
-    transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease !important;
 
     &.outline {
         color: black;
         background: transparent;
+    }
+
+    &.success {
+        color: black;
+        border: 1px solid transparent;
+        background: linear-gradient(135deg, yellowgreen, limegreen);
     }
 
     &:not([disabled]) {

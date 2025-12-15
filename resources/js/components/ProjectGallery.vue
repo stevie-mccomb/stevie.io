@@ -70,7 +70,7 @@
                                             </p>
 
                                             <span class="anchor">
-                                                View Project <span class="fa-light fa-long-arrow-right"></span>
+                                                View Project <span class="fa-light fa-long-arrow-right" style="margin-left: 1rem;"></span>
                                             </span>
                                         </div>
                                     </div>

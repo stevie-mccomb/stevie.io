@@ -7,7 +7,7 @@
                 </h1>
 
                 <h2 class="title">
-                    Web Developer, Designer &amp; UX Expert
+                    Full-stack Web Developer
                 </h2>
 
                 <h3 class="website">
@@ -20,60 +20,82 @@
                     Contact Information
                 </h2>
 
-                <ul>
+                <ul class="ul">
                     <li>
-                        <span class="fal fa-fw fa-phone"></span> 435.640.8857
+                        <span class="fal fa-fw fa-phone"></span>
+                        
+                        <a href="tel:4356408857" target="_blank">
+                            435.640.8857
+                        </a>
                     </li>
 
                     <li>
-                        <span class="fal fa-fw fa-envelope"></span> stevie.mccomb@gmail.com
+                        <span class="fal fa-fw fa-envelope"></span>
+                        
+                        <a href="mailto:stevie.mccomb@gmail.com" target="_blank">
+                            stevie.mccomb@gmail.com
+                        </a>
                     </li>
 
                     <li>
-                        <span class="fal fa-fw fa-map-pin"></span> 1021 Lone Peak Way, <br />Dripping Springs, TX 78620
+                        <span class="fal fa-fw fa-map-pin"></span> Olympia, WA
                     </li>
                 </ul>
             </section>
 
-            <section class="relevant-experience">
-                <h2>
-                    Relevant Experience (in order of importance)
+            <section class="notable-experience">
+                <h2 class="mb-0">
+                    Notable Experience
                 </h2>
+
+                <h3>
+                    (in order of importance)
+                </h3>
 
                 <ul class="ul">
                     <li>
-                        While working at isolved, architected, designed, developed, and maintained a custom Learning Management System (LMS) for training employees, partners, and customers in the use of our Human Capital Management software. After a year of in-house usage, the LMS became a product we sold directly to customers and resellers. It currently serves more than 3,000 companies with over 150,000 concurrent users and a lifetime record of 1,500,000+ users.
+                        Created isolved University (<a href="https://learning.myisolved.com" target="_blank">learning.myisolved.com</a>), a custom Learning Management System (LMS) for training employees, partners, and customers in the usage of isolved's Human Capital Management (HCM) software. After a year of in-house usage, the LMS became a product sold directly to customers and partners. It currently serves more than 4,500 companies with over 150,000 concurrent users and a lifetime record of 1,500,000+ users.
                     </li>
 
-                    <li>While working at Infinisource Inc., designed, developed, and maintained a custom Knowledge Base and B2B marketplace.</li>
+                    <li>
+                        Created Metrics Gym (<a href="https://www.metricsgym.com" target="_blank">metricsgym.com</a>), a SaaS application for comparing operational metrics of any business across any industry. Metrics Gym features vector-distance comparison between companies and an AI-powered analytics engine that can offer strategic operational advice to business owners based on their metrics and competition.
+                    </li>
 
-                    <li>Started working at the Art Institute of Salt Lake City in 2014 teaching web design and development as an adjunct faculty member.</li>
+                    <li>
+                        While working at Infinisource Inc., designed, developed, and maintained a custom Knowledge Base and B2B marketplace.
+                    </li>
 
-                    <li>While working at RiSER, designed, developed, and maintained marketing websites, blogs, video games, and ad-campaigns for Google, ABC/Disney, National Geographic, Hulu, Kraft, Sony, FX, the American Numismatic Association, OrangeSoda, Crunchyroll, and more.</li>
+                    <li>
+                        While working at RiSER (design agency), designed, developed, and maintained marketing websites, blogs, video games, and ad-campaigns for Google, ABC/Disney, National Geographic, Hulu, Kraft, Sony, FX, the American Numismatic Association, OrangeSoda, Crunchyroll, and more.
+                    </li>
 
-                    <li>Developed Android and iOS apps at RiSER for various clients, including a women's empowerment and affirmation lifestyle app for Saban Industries.</li>
+                    <li>
+                        Taught general computer programming, web design, web development, and game development at the Art Institute of Salt Lake City in 2014 as an adjunct faculty member.
+                    </li>
 
-                    <li>Worked as a Web Developer at RiSER from 2013 to 2015, learning software development cycles, design patterns, distributed version control, and team-based development strategies.</li>
+                    <li>
+                        While working as a freelancer, designed, developed, and maintained numerous large-scale websites for local entrepreneurial clients from 2006 through 2013.
+                    </li>
 
-                    <li>Marketed and performed mobile payment API integration for The Tao of Badass and Zaragoza Marketing in 2013, learning a great deal about online marketing and SMS-based payment solutions.</li>
-
-                    <li>While working as a freelancer, designed, developed, and maintained numerous large-scale websites for local entrepreneurial clients from 2006 through 2013.</li>
-
-                    <li>Started designing and developing websites in 2004.</li>
-
-                    <li>Worked in the restaurant industry for 8 years, learning the ins-and-outs of customer service and team-based communication.</li>
+                    <li>
+                        Worked in the hospitality industry for 8 years, learning the ins-and-outs of customer service and team-based communication.
+                    </li>
                 </ul>
             </section>
 
             <section class="education">
-                <h2>
+                <h2 class="mb-0">
                     Education
                 </h2>
+
+                <h3>
+                    (in order of importance)
+                </h3>
 
                 <ul class="ul">
                     <li>Bachelor of Science in Web Design and Interactive Media, Art Institute of Salt Lake City, Spring 2014</li>
 
-                    <li>Dean’s List and Honor Roll, Art Institute of Salt Lake City, Winter 2013 &ndash; Spring 2014</li>
+                    <li>Dean's List and Honor Roll, Art Institute of Salt Lake City, Winter 2013 &ndash; Spring 2014</li>
 
                     <li>Tutored for the following programs at the Art Institute of Salt Lake City from 2010 to 2014: Web Design and Interactive Media, Graphic Design, Audio Production, and Film Production.</li>
 
@@ -81,257 +103,91 @@
                 </ul>
             </section>
 
-            <section class="proficiencies">
-                <h2>
-                    Software and Language Proficiencies
+            <section class="professional-interests">
+                <h2 class="mb-0">
+                    Specializations &amp; Interests
                 </h2>
 
                 <h3>
-                    Programming Languages (and CLIs)
+                    (in order of proficiency)
                 </h3>
 
                 <ul class="ul">
                     <li>
-                        Back-end
-
-                        <ul>
-                            <li>PHP</li>
-
-                            <li>JavaScript (Node)</li>
-
-                            <li>Ruby</li>
-
-                            <li>Python</li>
-                        </ul>
+                        Full-stack Web Application Development
                     </li>
 
                     <li>
-                        Front-end
-
-                        <ul>
-                            <li>HTML</li>
-
-                            <li>CSS</li>
-
-                            <li>JavaScript</li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        Data Management and Database Languages
-
-                        <ul>
-                            <li>MySQL/MariaDB</li>
-
-                            <li>PostgreSQL</li>
-
-                            <li>XML</li>
-
-                            <li>JSON</li>
-                        </ul>
+                        Marketing Web Development
                     </li>
 
                     <li>
                         Game Development
-
-                        <ul>
-                            <li>C#</li>
-
-                            <li>GDScript</li>
-
-                            <li>Blueprint</li>
-                        </ul>
                     </li>
 
                     <li>
-                        Command Line and Utility
-
-                        <ul>
-                            <li>Bash (Linux Shell)</li>
-
-                            <li>Powershell (Windows Shell)</li>
-
-                            <li>Git (Version Control)</li>
-
-                            <li>Subversion (Version Control)</li>
-
-                            <li>Mercurial (Version Control)</li>
-                        </ul>
+                        Mobile App Development
                     </li>
                 </ul>
+            </section>
+
+            <section class="proficiencies">
+                <h2 class="mb-0">
+                    Software &amp; Language Proficiencies
+                </h2>
 
                 <h3>
-                    Design and Content Software
-                </h3>
-
-                <ul class="ul">
-                    <li>Figma</li>
-
-                    <li>Adobe Photoshop</li>
-
-                    <li>Adobe Illustrator</li>
-
-                    <li>Adobe InDesign</li>
-
-                    <li>Adobe AfterEffects</li>
-
-                    <li>Adobe Premiere</li>
-
-                    <li>Adobe Audition</li>
-                </ul>
-
-                <h3>
-                    Editors and IDEs
-                </h3>
-
-                <ul class="ul">
-                    <li>Sublime Text</li>
-
-                    <li>PHPStorm</li>
-
-                    <li>Unreal Engine</li>
-
-                    <li>Godot</li>
-
-                    <li>Unity</li>
-                </ul>
-
-                <h3>
-                    Frameworks and Libraries
+                    (in no particular order)
                 </h3>
 
                 <ul class="ul">
                     <li>
-                        CSS
+                        <strong>
+                            Programming Languages:
+                        </strong>
 
-                        <ul>
-                            <li>SASS</li>
-
-                            <li>LESS</li>
-
-                            <li>Twitter Bootstrap</li>
-
-                            <li>Bulma</li>
-
-                            <li>Tailwind</li>
-                        </ul>
+                        HTML, CSS, JavaScript, PHP, SQL, Bash
                     </li>
 
                     <li>
-                        JavaScript
+                        <strong>
+                            Frameworks &amp; Libraries
+                        </strong>
 
-                        <ul>
-                            <li>Vue</li>
-
-                            <li>React</li>
-
-                            <li>AngularJS</li>
-
-                            <li>jQuery</li>
-                        </ul>
+                        Laravel, WordPress, Symfony, Vue, React, Svelte, Vite, Astro, Shopify
                     </li>
 
                     <li>
-                        PHP
+                        <strong>
+                            Version Control:
+                        </strong>
 
-                        <ul>
-                            <li>Laravel</li>
-
-                            <li>WordPress</li>
-
-                            <li>Symfony</li>
-
-                            <li>Slim</li>
-
-                            <li>CodeIgniter</li>
-
-                            <li>Khepri (Custom Built)</li>
-
-                            <li>Heka (Custom Built)</li>
-                        </ul>
+                        Git, Subversion, Mercurial, Perforce
                     </li>
 
                     <li>
-                        Ruby
+                        <strong>
+                            Design &amp; Content Software:
+                        </strong>
 
-                        <ul>
-                            <li>Rails</li>
-                        </ul>
+                        Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, AfterEffects, Premiere, Audition, etc.)
                     </li>
-                </ul>
 
-                <h3>
-                    Content Management Systems (CMS)
-                </h3>
+                    <li>
+                        <strong>
+                            Editors &amp; IDEs
+                        </strong>
 
-                <ul class="ul">
-                    <li>WordPress</li>
+                        Visual Studio Code, PHPStorm, Sublime Text, JetBrains Rider
+                    </li>
 
-                    <li>Shopify</li>
+                    <li>
+                        <strong>
+                            Game Engines
+                        </strong>
 
-                    <li>Laravel Nova</li>
-
-                    <li>PageLime</li>
-
-                    <li>Surreal</li>
-
-                    <li>SiteRiSER</li>
-
-                    <li>PranaLite</li>
-
-                    <li>Custom Built</li>
-                </ul>
-
-                <h3>
-                    Web Servers
-                </h3>
-
-                <ul class="ul">
-                    <li>Apache</li>
-
-                    <li>Nginx</li>
-
-                    <li>Express</li>
-                </ul>
-
-                <h3>
-                    Mobile SDKs
-                </h3>
-
-                <ul class="ul">
-                    <li>PhoneGap</li>
-
-                    <li>Corona</li>
-
-                    <li>React Native</li>
-
-                    <li>Android SDK</li>
-
-                    <li>Adobe AIR</li>
-                </ul>
-
-                <h3>
-                    Misc. Commonly Used Tools and Plugins
-                </h3>
-
-                <ul class="ul">
-                    <li>Node and NPM</li>
-
-                    <li>Docker</li>
-
-                    <li>Gulp</li>
-
-                    <li>Grunt</li>
-
-                    <li>Express</li>
-
-                    <li>Socket.IO</li>
-
-                    <li>Babel</li>
-
-                    <li>Pusher</li>
-
-                    <li>Vite</li>
+                        Godot, Unity, Unreal Engine, Phaser, Pixi
+                    </li>
                 </ul>
             </section>
         </div>
@@ -373,7 +229,7 @@
     }
 
     h3 {
-        font-size: 1.25rem;
+        font-size: 0.9rem;
         color: lighten(black, 32%);
     }
 
@@ -407,23 +263,25 @@
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1rem;
         line-height: 1.5;
 
         .fal {
             color: red;
         }
-
-        &:last-of-type {
-            margin-bottom: 0;
-        }
     }
 
     .ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         margin-bottom: 2rem;
 
         &:last-child {
             margin-bottom: 0;
         }
+    }
+
+    li {
+        margin-bottom: 0;
     }
 </style>

@@ -104,6 +104,7 @@
 
     a {
         text-decoration: none;
+        border-color: transparent;
     }
 
     h2 {
@@ -114,7 +115,7 @@
 
     nav {
         display: flex;
-        gap: 1rem;
+        gap: 2rem;
 
         button {
             display: none;

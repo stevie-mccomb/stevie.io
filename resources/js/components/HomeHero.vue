@@ -18,11 +18,11 @@
             </Transition>
 
             <Transition @after-enter="++animationStep">
-                <h3 v-show="animationStep > 3" :class="{ loaded: animationStep > 3 }">LAMP Stack</h3>
+                <h3 v-show="animationStep > 3" :class="{ loaded: animationStep > 3 }">Specializing in SaaS applications</h3>
             </Transition>
 
             <Transition @after-enter="++animationStep">
-                <h4 v-show="animationStep > 4" :class="{ loaded: animationStep > 4 }">Linux, Apache, MySQL, PHP</h4>
+                <h4 v-show="animationStep > 4" :class="{ loaded: animationStep > 4 }">with a minor specialization in web-based marketing properties</h4>
             </Transition>
         </div>
 
