@@ -116,7 +116,7 @@ export default [
         path: '/resume',
         component: Resume,
         meta: {
-            title: 'Resume',
+            title: 'Résumé',
         },
     },
 ];

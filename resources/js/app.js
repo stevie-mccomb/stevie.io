@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../scss/app.scss';
 
-import { createApp, ref } from 'vue';
+import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/components/App.vue';
 import routes from '@/routes';
@@ -20,6 +20,6 @@ window.router.beforeEach((to, from) => {
     document.title = (!!to.meta.title) ? `${to.meta.title} | Stevie McComb` : 'Stevie McComb';
 });
 
-app.use(router);
+window.app.use(window.router);
 
-app.mount('#app');
+window.app.mount('#app');

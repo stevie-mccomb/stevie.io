@@ -66,7 +66,7 @@
                     </li>
 
                     <li>
-                        While working at RiSER (design agency), designed, developed, and maintained marketing websites, blogs, video games, and ad-campaigns for Google, ABC/Disney, National Geographic, Hulu, Kraft, Sony, FX, the American Numismatic Association, OrangeSoda, Crunchyroll, and more.
+                        While working at RiSER (design agency in Pleasant Grove, Utah), designed, developed, and maintained marketing websites, blogs, video games, and ad-campaigns for Google, ABC/Disney, National Geographic, Hulu, Kraft, Sony, FX, American Numismatic Association, Crunchyroll, and more.
                     </li>
 
                     <li>
@@ -231,6 +231,8 @@
     h3 {
         font-size: 0.9rem;
         color: lighten(black, 32%);
+        margin-left: auto;
+        margin-right: auto;
     }
 
     header {
