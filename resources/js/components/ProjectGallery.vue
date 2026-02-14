@@ -184,10 +184,8 @@
 
     .cell {
         position: relative;
+        min-height: 24rem;
         max-height: 32rem;
-        @include breakpoint-mobile {
-            min-height: 24rem;
-        }
     }
 
     .cell-padding {
